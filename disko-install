@@ -42,7 +42,6 @@ readonly libexec_dir="${0%/*}"
 
 nix_args=(
   --extra-experimental-features 'nix-command flakes'
-  --no-write-lock-file
 )
 dry_run=
 extraSystemConfig="{}"
@@ -199,7 +198,7 @@ main() {
   fi
 
   # Resolve flake to nix store path to respect git tracking
-  if ! flake_metadata=$(nix flake metadata --json "${nix_args[@]}" "$flake" 2>&1); then
+  if ! flake_metadata=$(nix flake metadata --json --no-write-lock-file "${nix_args[@]}" "$flake" 2>&1); then
     echo "Failed to resolve flake metadata for: $flake" >&2
     echo "$flake_metadata" >&2
     exit 1
