@@ -42,7 +42,7 @@ readonly libexec_dir="${0%/*}"
 
 nix_args=(
   --extra-experimental-features 'nix-command flakes'
-  "--no-write-lock-file"
+  --no-write-lock-file
 )
 dry_run=
 extraSystemConfig="{}"
