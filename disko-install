@@ -244,7 +244,7 @@ main() {
     -A installToplevel \
     -A closureInfo \
     -A "$diskoAttr"); then
-    echo "Failed to build NixOS configuration" >&2
+    echo "Failed to build NixOS configuration"
     exit 1
   fi
 
