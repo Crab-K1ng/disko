@@ -231,8 +231,7 @@ main() {
      trap cleanupMountPoint EXIT
   fi
 
-  build_log=$(mktemp)
-  if ! outputs=$(nixBuild "${libexec_dir}"/install-cli.nix \
+  nixBuild "${libexec_dir}"/install-cli.nix \
     "${nix_args[@]}" \
     --no-out-link \
     --impure \
@@ -244,15 +243,9 @@ main() {
     --argstr extraSystemConfig "$extraSystemConfig" \
     -A installToplevel \
     -A closureInfo \
-    -A "$diskoAttr" \
-    -A "$diskoAttr" 2> >(tee "$build_log" >&2)); then
-      echo "Failed to build NixOS configuration" >&2
-      echo "--- stdout ---" >&2
-      echo "$outputs" >&2
-      echo "--- full stderr saved in: $build_log ---" >&2
-      exit 1
-    exit 1
-  fi
+    -A "$diskoAttr"
+  exit 1
+  
 
   IFS=$'\n' mapfile -t artifacts <<<"$outputs"
 
