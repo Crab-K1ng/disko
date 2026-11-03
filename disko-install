@@ -245,6 +245,7 @@ main() {
     -A closureInfo \
     -A "$diskoAttr"); then
     echo "Failed to build NixOS configuration"
+    echo $outputs
     exit 1
   fi
 
